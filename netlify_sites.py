@@ -21,6 +21,8 @@ load_dotenv()
 DEFAULT_USERNAME = "igiteam"
 DEFAULT_AVATAR = "https://github.com/igiteam.png"
 DEFAULT_GITHUB_URL = "https://igiteam.github.io/"
+OUTPUT_FILE = 'index.html'
+OUTPUT_DIRECTORY = 'public'
 
 # Color codes for terminal output
 class Colors:
@@ -1182,23 +1184,40 @@ def generate_html_grid(sites, settings):
     
     return html_content
 
-def save_html_file(html_content, output_file="netlify_sites.html"):
-    """Save HTML content to file"""
+def save_html_file(html_content, output_file="index.html", output_dir=None):
+    """Save HTML content to file, optionally in a specified directory"""
     try:
-        with open(output_file, 'w', encoding='utf-8') as f:
+        # Handle directory if specified
+        if output_dir:
+            # Create directory if it doesn't exist
+            os.makedirs(output_dir, exist_ok=True)
+            # Join directory and filename
+            output_path = os.path.join(output_dir, output_file)
+        else:
+            output_path = output_file
+        
+        # Write the file
+        with open(output_path, 'w', encoding='utf-8') as f:
             f.write(html_content)
-        print_color(f"✅ HTML file saved as: {output_file}", Colors.GREEN)
+        
+        print_color(f"✅ HTML file saved as: {output_path}", Colors.GREEN)
         return True
+        
     except Exception as e:
         print_color(f"❌ Error saving HTML file: {e}", Colors.RED)
         return False
 
-def open_html_file(output_file="netlify_sites.html"):
+def open_html_file(output_file="index.html", output_dir=None):
     """Open the HTML file in default browser"""
     try:
-        file_path = os.path.abspath(output_file)
+        # Construct the full path
+        if output_dir:
+            file_path = os.path.abspath(os.path.join(output_dir, output_file))
+        else:
+            file_path = os.path.abspath(output_file)
+            
         webbrowser.open(f"file://{file_path}")
-        print_color(f"✅ Opened {output_file} in your browser", Colors.GREEN)
+        print_color(f"✅ Opened {file_path} in your browser", Colors.GREEN)
         return True
     except Exception as e:
         print_color(f"❌ Error opening HTML file: {e}", Colors.RED)
@@ -1228,18 +1247,17 @@ def main():
     html_content = generate_html_grid(sites, settings)
     
     # Save HTML file
-    output_file = "netlify_sites.html"
-    if save_html_file(html_content, output_file):
+    if save_html_file(html_content, OUTPUT_FILE, OUTPUT_DIRECTORY):
         print_color("\n📊 HTML Grid Summary:", Colors.BOLD)
         print_color(f"   Total sites: {len(sites)}", Colors.CYAN)
-        print_color(f"   Output file: {output_file}", Colors.CYAN)
+        print_color(f"   Output file: {OUTPUT_FILE}", Colors.CYAN)  # Changed output_file to OUTPUT_FILE
         print_color(f"   Username: {settings['username']}", Colors.CYAN)
         
         # Ask if user wants to open the file
         response = input(f"\n{Colors.BOLD}Open HTML file in browser? (y/n): {Colors.END}").lower()
         if response == 'y':
-            open_html_file(output_file)
-    
+            open_html_file(OUTPUT_FILE, OUTPUT_DIRECTORY)  # Pass both filename and directory
+
     print_color("\n✨ Done! The GitHub-style HTML grid view has been generated.", Colors.GREEN)
 
 if __name__ == "__main__":
