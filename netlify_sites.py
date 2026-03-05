@@ -289,7 +289,7 @@ def generate_html_grid(sites, settings):
         site_cards_html += f'''
             <div class="repo-item">
                 <div class="screenshot-container" onclick="window.open('{site_url or '#'}', '_blank')">
-                    <img class="screenshot" src="{screenshot_url}" loading="lazy" alt="Screenshot of {site_name}">
+                    <img class="screenshot" src="{screenshot_url}" loading="lazy">
                     <div class="screenshot-overlay">
                         <i class="fas fa-external-link-alt"></i> Open site
                     </div>
