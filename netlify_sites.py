@@ -315,7 +315,7 @@ def generate_html_grid(sites, settings):
             </div>
         '''
     
-    # Read the HTML template
+    # Read the HTML template with ALL curly braces escaped (doubled)
     html_template = """<!DOCTYPE html>
 <html lang="en">
 
@@ -339,14 +339,14 @@ def generate_html_grid(sites, settings):
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
+        * {{
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
+        }}
 
-        :root {
+        :root {{
             --github-bg: #ffffff;
             --github-text: #24292f;
             --github-text-secondary: #57606a;
@@ -358,22 +358,22 @@ def generate_html_grid(sites, settings):
             --github-shadow: rgba(140, 149, 159, 0.15);
             --netlify-primary: #00c7b7;
             --netlify-secondary: #32e6e2;
-        }
+        }}
 
-        body {
+        body {{
             background-color: var(--github-bg);
             color: var(--github-text);
             line-height: 1.5;
             padding: 24px;
-        }
+        }}
 
-        .container {
+        .container {{
             max-width: 1280px;
             margin: 0 auto;
-        }
+        }}
 
         /* Repository Header */
-        .repo-header {
+        .repo-header {{
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -382,22 +382,22 @@ def generate_html_grid(sites, settings):
             border-bottom: 1px solid var(--github-border);
             flex-wrap: wrap;
             gap: 16px;
-        }
+        }}
 
-        .repo-header h1 {
+        .repo-header h1 {{
             font-size: 32px;
             font-weight: 600;
             color: var(--github-text);
-        }
+        }}
 
-        .search-container {
+        .search-container {{
             display: flex;
             gap: 12px;
             align-items: center;
             flex-wrap: nowrap;
-        }
+        }}
 
-        .repo-search {
+        .repo-search {{
             background-color: var(--github-bg);
             border: 1px solid var(--github-border);
             border-radius: 6px;
@@ -408,37 +408,37 @@ def generate_html_grid(sites, settings):
             transition: all 0.2s;
             box-shadow: 0 1px 0 rgba(27, 31, 35, 0.04);
             flex-shrink: 0;
-        }
+        }}
 
-        .repo-search:focus {
+        .repo-search:focus {{
             outline: none;
             border-color: var(--github-primary);
             box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.15);
-        }
+        }}
 
-        .view-controls {
+        .view-controls {{
             display: flex;
             gap: 8px;
             align-items: center;
             flex: 1;
             justify-content: flex-end;
-        }
+        }}
 
-        .sort-buttons {
+        .sort-buttons {{
             display: flex;
             gap: 4px;
             align-items: center;
             flex-shrink: 0;
-        }
+        }}
 
-        .view-toggle {
+        .view-toggle {{
             display: flex;
             gap: 4px;
             align-items: center;
             flex-shrink: 0;
-        }
+        }}
 
-        .btn-icon {
+        .btn-icon {{
             background: none;
             border: 1px solid var(--github-border);
             border-radius: 6px;
@@ -452,76 +452,76 @@ def generate_html_grid(sites, settings):
             transition: all 0.2s;
             background-color: var(--github-bg);
             white-space: nowrap;
-        }
+        }}
 
-        .btn-icon:hover {
+        .btn-icon:hover {{
             background-color: var(--github-hover);
             border-color: var(--github-primary);
             color: var(--github-primary);
-        }
+        }}
 
-        .btn-icon.active {
+        .btn-icon.active {{
             background-color: var(--github-primary);
             border-color: var(--github-primary);
             color: white;
-        }
+        }}
 
-        .btn-icon i {
+        .btn-icon i {{
             font-size: 14px;
-        }
+        }}
 
-        @media (max-width: 900px) {
-            .sort-text {
+        @media (max-width: 900px) {{
+            .sort-text {{
                 display: none;
-            }
-            .btn-icon {
+            }}
+            .btn-icon {{
                 padding: 8px;
-            }
-        }
+            }}
+        }}
 
-        @media (max-width: 700px) {
-            .search-container {
+        @media (max-width: 700px) {{
+            .search-container {{
                 flex-wrap: wrap;
-            }
-            .repo-search {
+            }}
+            .repo-search {{
                 width: 100%;
-            }
-            .view-controls {
+            }}
+            .view-controls {{
                 width: 100%;
                 justify-content: space-between;
-            }
-        }
+            }}
+        }}
 
-        .user-info {
+        .user-info {{
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 8px;
-        }
+        }}
 
-        .user-details {
+        .user-details {{
             display: flex;
             flex-direction: row;
             align-items: center;
             gap: 8px;
             flex-wrap: wrap;
-        }
+        }}
 
-        .user-avatar {
+        .user-avatar {{
             width: 40px;
             height: 40px;
             border-radius: 50%;
             border: 1px solid var(--github-border);
             flex-shrink: 0;
-        }
+        }}
 
-        .user-name {
+        .user-name {{
             font-weight: 600;
             font-size: 18px;
             line-height: 1.2;
-        }
+        }}
 
-        .repo-count {
+        .repo-count {{
             font-size: 14px;
             color: var(--github-text-secondary);
             background-color: var(--github-hover);
@@ -529,10 +529,10 @@ def generate_html_grid(sites, settings):
             border-radius: 12px;
             display: inline-block;
             align-self: flex-start;
-        }
+        }}
 
         /* Screenshot Container */
-        .screenshot-container {
+        .screenshot-container {{
             width: 100%;
             height: 160px;
             overflow: hidden;
@@ -540,20 +540,20 @@ def generate_html_grid(sites, settings):
             background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
             position: relative;
             cursor: pointer;
-        }
+        }}
 
-        .screenshot {
+        .screenshot {{
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
-        }
+        }}
 
-        .repo-item:hover .screenshot {
+        .repo-item:hover .screenshot {{
             transform: scale(1.05);
-        }
+        }}
 
-        .screenshot-overlay {
+        .screenshot-overlay {{
             position: absolute;
             top: 0;
             left: 0;
@@ -568,92 +568,92 @@ def generate_html_grid(sites, settings):
             color: white;
             font-size: 1em;
             font-weight: bold;
-        }
+        }}
 
-        .screenshot-container:hover .screenshot-overlay {
+        .screenshot-container:hover .screenshot-overlay {{
             opacity: 1;
-        }
+        }}
 
         /* Repository Grid */
-        .repo-grid {
+        .repo-grid {{
             display: grid;
             gap: 20px;
             margin-bottom: 40px;
             transition: all 0.3s ease;
-        }
+        }}
 
-        .repo-grid.grid-view {
+        .repo-grid.grid-view {{
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-        }
+        }}
 
-        .repo-grid.list-view {
+        .repo-grid.list-view {{
             grid-template-columns: 1fr;
-        }
+        }}
 
         /* Repository Item - Grid View */
-        .repo-grid.grid-view .repo-item {
+        .repo-grid.grid-view .repo-item {{
             padding: 0 0 20px 0;
             flex-direction: column;
             overflow: hidden;
-        }
+        }}
 
-        .repo-grid.grid-view .repo-content {
+        .repo-grid.grid-view .repo-content {{
             padding: 16px 20px 20px 20px;
-        }
+        }}
 
-        .repo-grid.grid-view .repo-meta {
+        .repo-grid.grid-view .repo-meta {{
             flex-wrap: wrap;
             padding: 0 20px 0 20px;
-        }
+        }}
 
         /* Repository Item - List View */
-        .repo-grid.list-view .repo-item {
+        .repo-grid.list-view .repo-item {{
             padding: 0;
             display: flex;
             flex-direction: row;
             overflow: hidden;
-        }
+        }}
 
-        .repo-grid.list-view .screenshot-container {
+        .repo-grid.list-view .screenshot-container {{
             width: 240px;
             height: 180px;
             flex-shrink: 0;
             border-radius: 6px 0 0 6px;
-        }
+        }}
 
-        .repo-grid.list-view .repo-content {
+        .repo-grid.list-view .repo-content {{
             padding: 16px 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
-        }
+        }}
 
-        .repo-grid.list-view .repo-title {
+        .repo-grid.list-view .repo-title {{
             margin-bottom: 8px;
-        }
+        }}
 
-        .repo-grid.list-view .site-details {
+        .repo-grid.list-view .site-details {{
             margin: 8px 0 !important;
-        }
+        }}
 
-        .repo-grid.list-view .repo-meta {
+        .repo-grid.list-view .repo-meta {{
             margin-top: auto;
             padding: 0;
-        }
+        }}
 
-        @media (max-width: 900px) {
-            .repo-grid.list-view .repo-item {
+        @media (max-width: 900px) {{
+            .repo-grid.list-view .repo-item {{
                 flex-direction: column;
-            }
-            .repo-grid.list-view .screenshot-container {
+            }}
+            .repo-grid.list-view .screenshot-container {{
                 width: 100%;
                 height: 160px;
                 border-radius: 6px 6px 0 0;
-            }
-        }
+            }}
+        }}
 
         /* Repository Item */
-        .repo-item {
+        .repo-item {{
             border: 1px solid var(--github-border);
             border-radius: 8px;
             background-color: var(--github-repo-bg);
@@ -661,22 +661,22 @@ def generate_html_grid(sites, settings):
             display: flex;
             height: 100%;
             box-shadow: 0 1px 3px var(--github-shadow);
-        }
+        }}
 
-        .repo-item:hover {
+        .repo-item:hover {{
             border-color: var(--github-primary);
             box-shadow: 0 3px 6px var(--github-shadow);
             transform: translateY(-2px);
-        }
+        }}
 
-        .repo-title {
+        .repo-title {{
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
             margin-bottom: 12px;
-        }
+        }}
 
-        .repo-title a {
+        .repo-title a {{
             color: var(--github-primary);
             text-decoration: none;
             font-size: 18px;
@@ -684,13 +684,13 @@ def generate_html_grid(sites, settings):
             line-height: 1.3;
             flex: 1;
             word-break: break-all;
-        }
+        }}
 
-        .repo-title a:hover {
+        .repo-title a:hover {{
             text-decoration: underline;
-        }
+        }}
 
-        .repo-visibility {
+        .repo-visibility {{
             border: 1px solid var(--github-border);
             border-radius: 12px;
             padding: 2px 8px;
@@ -700,9 +700,9 @@ def generate_html_grid(sites, settings):
             font-weight: 500;
             margin-left: 8px;
             flex-shrink: 0;
-        }
+        }}
 
-        .repo-meta {
+        .repo-meta {{
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
@@ -712,137 +712,137 @@ def generate_html_grid(sites, settings):
             align-items: center;
             border-top: 1px solid var(--github-border);
             padding-top: 12px;
-        }
+        }}
 
-        .deploy-status {
+        .deploy-status {{
             display: flex;
             align-items: center;
             gap: 4px;
-        }
+        }}
 
-        .deploy-status i {
+        .deploy-status i {{
             font-size: 12px;
-        }
+        }}
 
-        .repo-updated {
+        .repo-updated {{
             font-size: 12px;
             color: var(--github-text-secondary);
-        }
+        }}
 
         /* Footer */
-        .footer {
+        .footer {{
             text-align: center;
             padding-top: 32px;
             margin-top: 32px;
             border-top: 1px solid var(--github-border);
             color: var(--github-text-secondary);
             font-size: 14px;
-        }
+        }}
 
-        .footer a {
+        .footer a {{
             color: var(--github-primary);
             text-decoration: none;
-        }
+        }}
 
-        .footer a:hover {
+        .footer a:hover {{
             text-decoration: underline;
-        }
+        }}
 
         /* Loading & Error States */
         .loading,
-        .error {
+        .error {{
             text-align: center;
             padding: 60px 20px;
             border-radius: 8px;
             background-color: var(--github-hover);
             border: 1px solid var(--github-border);
             grid-column: 1 / -1;
-        }
+        }}
 
-        .loading i {
+        .loading i {{
             font-size: 32px;
             margin-bottom: 16px;
             color: var(--github-primary);
-        }
+        }}
 
-        .loading p {
+        .loading p {{
             font-size: 16px;
             color: var(--github-text-secondary);
-        }
+        }}
 
-        .error {
+        .error {{
             color: #cf222e;
-        }
+        }}
 
-        .error i {
+        .error i {{
             font-size: 32px;
             margin-bottom: 16px;
-        }
+        }}
 
         /* No Results */
-        .no-results {
+        .no-results {{
             text-align: center;
             padding: 60px 20px;
             border-radius: 8px;
             background-color: var(--github-hover);
             border: 1px solid var(--github-border);
             grid-column: 1 / -1;
-        }
+        }}
 
-        .no-results i {
+        .no-results i {{
             font-size: 32px;
             margin-bottom: 16px;
             color: var(--github-text-secondary);
-        }
+        }}
 
-        .no-results p {
+        .no-results p {{
             font-size: 16px;
             color: var(--github-text-secondary);
-        }
+        }}
 
         /* API Info */
-        .api-info {
+        .api-info {{
             font-size: 12px;
             color: var(--github-text-secondary);
             margin-top: 4px;
             display: flex;
             align-items: center;
             gap: 4px;
-        }
+        }}
 
-        .api-info i {
+        .api-info i {{
             color: var(--netlify-primary);
-        }
+        }}
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
+        @media (max-width: 768px) {{
+            body {{
                 padding: 16px;
-            }
+            }}
 
-            .repo-header {
+            .repo-header {{
                 flex-direction: column;
                 align-items: flex-start;
-            }
+            }}
 
-            .search-container {
+            .search-container {{
                 width: 100%;
                 flex-direction: column;
                 align-items: stretch;
-            }
+            }}
 
-            .repo-search {
+            .repo-search {{
                 width: 100%;
-            }
+            }}
 
-            .view-controls {
+            .view-controls {{
                 justify-content: space-between;
-            }
+            }}
 
-            .repo-grid.grid-view {
+            .repo-grid.grid-view {{
                 grid-template-columns: 1fr;
-            }
-        }
+            }}
+        }}
     </style>
 </head>
 
