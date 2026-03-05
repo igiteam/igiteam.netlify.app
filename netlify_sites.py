@@ -285,6 +285,7 @@ def generate_html_grid(sites, settings):
         if site_url:
             domain = site_url.replace('https://', '').replace('http://', '').split('/')[0]
             screenshot_url = f"https://img.sdappnet.cloud/?url={domain}&w=1920&h=1080"
+            console.log(screenshot_url)
         site_cards_html += f'''
             <div class="repo-item">
                 <div class="screenshot-container" onclick="window.open('{site_url or '#'}', '_blank')">
