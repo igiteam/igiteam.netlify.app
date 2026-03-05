@@ -341,18 +341,18 @@ def generate_html_grid(sites, settings):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{username} - Netlify Sites</title>
+    <title>{username}'s Netlify Sites</title>
 
     <link rel="icon" href="{avatar}" type="image/x-icon">
     <link rel="apple-touch-icon" href="{avatar}" sizes="180x180">
     <link rel="icon" type="image/png" href="{avatar}" sizes="32x32">
     <link rel="icon" type="image/png" href="{avatar}"" sizes="16x16">
-    <meta itemprop="name" content="{username} - Netlify Sites">
+    <meta itemprop="name" content="{username}'s Netlify Sites">
     <meta itemprop="image" content="{meta_image}">
-    <meta property="og:title" content="{username} - Netlify Sites">
+    <meta property="og:title" content="{username}'s Netlify Sites">
     <meta property="og:image" content="{avatar}">
     <meta property="og:type" content="website">
-    <meta name="twitter:title" content="{username} - Netlify Sites">
+    <meta name="twitter:title" content="{username}'s Netlify Sites">
     <meta name="twitter:image" content="{meta_image}">
     <meta name="twitter:card" content="summary_large_image">
 
