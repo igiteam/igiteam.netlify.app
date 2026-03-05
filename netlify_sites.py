@@ -930,13 +930,13 @@ def generate_html_grid(sites, settings):
 
         <!-- Add this after your existing buttons -->
         <div
-            style="position: fixed; bottom: 180px; right: 30px; z-index: 999999; display: flex; flex-direction: column; gap: 10px;">
+            style="position: fixed; bottom: 20px; right: 30px; z-index: 999999; display: flex; flex-direction: column; gap: 10px;">
             <!-- Netlify Link -->
             <div
                 style="width: 60px; height: 60px; border-radius: 50%; background: rgba(30, 30, 40, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">
                 <a href="https://github.com/igiteam/igiteam.netlify.app" target="_blank">
                     <img src="https://cdn.sdappnet.cloud/rtx/images/github-icon.png" alt="Github Logo"
-                        style="width: 60px; height: 60px; display: block;">
+                        style="width: 40px; height: 40px; display: block;">
                 </a>
             </div>
 
@@ -946,7 +946,7 @@ def generate_html_grid(sites, settings):
                 <a href="https://buymeacoffee.com/igiteam" target="_blank"
                     style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
                     <img src="https://studio.buymeacoffee.com/assets/img/bmc-meta-new/new/apple-icon-120x120.png"
-                        alt="Buy Me a Coffee" style="width: 60px; height: 60px; display: block; border-radius: 50%;">
+                        alt="Buy Me a Coffee" style="width: 30px; height: 30px; display: block; border-radius: 50%;">
                 </a>
             </div>
         </div>
