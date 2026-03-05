@@ -102,25 +102,39 @@ def format_relative_time(date_string):
         return str(date_string)
 
 def get_site_url(site):
-    """Get the best URL for the site"""
+    """Get the best URL for the site and ensure it uses HTTPS"""
     # Try custom domain first
     custom_domain = safe_get(site, 'custom_domain')
     if custom_domain and custom_domain.strip():
-        return f"https://{custom_domain}"
+        # Ensure it's HTTPS
+        if not custom_domain.startswith(('http://', 'https://')):
+            return f"https://{custom_domain}"
+        else:
+            # If it has http://, convert to https://
+            return custom_domain.replace('http://', 'https://', 1)
     
     # Try URL
     url = safe_get(site, 'url')
     if url:
+        # Ensure it's HTTPS
+        if url.startswith('http://'):
+            return url.replace('http://', 'https://', 1)
         return url
     
     # Try ssl_url
     ssl_url = safe_get(site, 'ssl_url')
     if ssl_url:
+        # Ensure it's HTTPS
+        if ssl_url.startswith('http://'):
+            return ssl_url.replace('http://', 'https://', 1)
         return ssl_url
     
     # Try deploy_url
     deploy_url = safe_get(site, 'deploy_url')
     if deploy_url:
+        # Ensure it's HTTPS
+        if deploy_url.startswith('http://'):
+            return deploy_url.replace('http://', 'https://', 1)
         return deploy_url
     
     return None
