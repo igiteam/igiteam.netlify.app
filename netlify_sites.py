@@ -885,7 +885,7 @@ def generate_html_grid(sites, settings):
                     </div>
                     <div class="api-info">
                         <i class="fas fa-cloud"></i>
-                        <span>Live data from Netlify API</span>
+                        <span>Live data from Netlify API <a href="https://img.sdappnet.cloud/queue/stats" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">🏞</a></span>
                     </div>
                 </div>
             </div>
@@ -1069,6 +1069,7 @@ def generate_html_grid(sites, settings):
             sites.forEach(site => {{
                 const siteUrl = site.url || null;
                 const screenshotUrl = siteUrl ? `https://img.sdappnet.cloud/?url=${{siteUrl.replace('https://', '').replace('http://', '').split('/')[0]}}&w=1920&h=1080` : null;
+                const screenshotUrlRC = siteUrl ? `https://img.sdappnet.cloud/?url=${{siteUrl.replace('https://', '').replace('http://', '').split('/')[0]}}&w=1920&h=1080&rc=1` : null;
                 const siteName = site.name || 'Unnamed Site';
                 const customDomain = site.custom_domain || 'No custom domain';
                 const accountName = site.account_name || site.account_slug || '{username}';
@@ -1079,9 +1080,7 @@ def generate_html_grid(sites, settings):
                 html += `
                     <div class="repo-item">
                         <div class="screenshot-container" onclick="window.open('${{siteUrl || '#'}}', '_blank')">
-                            <img class="screenshot" src="${{screenshotUrl || 'https://via.placeholder.com/600x400?text=No+Screenshot'}}" 
-                                 alt="Screenshot of ${{siteName}}"
-                                 onerror="this.src='https://via.placeholder.com/600x400?text=Failed+to+load'">
+                            <img class="screenshot" src="${{screenshotUrl}}"/>
                             <div class="screenshot-overlay">
                                 <i class="fas fa-external-link-alt"></i> Open site
                             </div>
@@ -1119,7 +1118,7 @@ def generate_html_grid(sites, settings):
                                     <span>SSL ${{sslEnabled ? 'Enabled' : 'Disabled'}}</span>
                                 </div>
                                 <div class="repo-updated">
-                                    <span>Updated ${{formatDate(updatedAt)}}</span>
+                                    <span>Updated ${{formatDate(updatedAt)}} <a href=${{screenshotUrlRC}} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">🏞</a></span>
                                 </div>
                             </div>
                         </div>
