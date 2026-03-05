@@ -285,7 +285,7 @@ def generate_html_grid(sites, settings):
         if site_url:
             domain = site_url.replace('https://', '').replace('http://', '').split('/')[0]
             screenshot_url = f"https://img.sdappnet.cloud/?url={domain}&w=1920&h=1080"
-            console.log(screenshot_url)
+
         site_cards_html += f'''
             <div class="repo-item">
                 <div class="screenshot-container" onclick="window.open('{site_url or '#'}', '_blank')">
@@ -1220,11 +1220,18 @@ def save_html_file(html_content, output_file="index.html", output_dir=None):
         else:
             output_path = output_file
         
-        # Write the file
+        # Write the file (using 'w' mode to overwrite)
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(html_content)
         
-        print_color(f"✅ HTML file saved as: {output_path}", Colors.GREEN)
+        # Get absolute path for confirmation
+        absolute_path = os.path.abspath(output_path)
+        print_color(f"✅ HTML file saved/updated: {absolute_path}", Colors.GREEN)
+        
+        # Show file size
+        file_size = os.path.getsize(output_path)
+        print_color(f"   File size: {file_size:,} bytes", Colors.CYAN)
+        
         return True
         
     except Exception as e:
