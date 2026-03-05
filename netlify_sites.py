@@ -928,8 +928,7 @@ def generate_html_grid(sites, settings):
             <p>Generated on {generated_date}</p>
         </div>
 
-        <div
-            style="position: fixed; bottom: 20px; right: 20px; z-index: 999999; background-color: rgba(255,255,255,0.9); border-radius: 8px; padding: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="position: fixed; bottom: 20px; right: 20px; z-index: 999999; background-color: rgba(255,255,255,0.9); border-radius: 8px; padding: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
             <a href="https://github.com/igiteam/igiteam.netlify.app" target="_blank">
                 <img src="https://cdn.sdappnet.cloud/rtx/images/github-icon.png" alt="Github Logo"
                     style="width: 40px; height: 40px; display: block;">
