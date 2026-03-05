@@ -283,13 +283,10 @@ def generate_html_grid(sites, settings):
         if site_url:
             domain = site_url.replace('https://', '').replace('http://', '').split('/')[0]
             screenshot_url = f"https://img.sdappnet.cloud/?url={domain}&w=1920&h=1080"
-        
         site_cards_html += f'''
             <div class="repo-item">
                 <div class="screenshot-container" onclick="window.open('{site_url or '#'}', '_blank')">
-                    <img class="screenshot" src="{screenshot_url or 'https://via.placeholder.com/600x400?text=No+Screenshot'}" 
-                         alt="Screenshot of {site_name}"
-                         onerror="this.src='https://via.placeholder.com/600x400?text=Failed+to+load'">
+                    <img class="screenshot" src="{screenshot_url}" alt="Screenshot of {site_name}">
                     <div class="screenshot-overlay">
                         <i class="fas fa-external-link-alt"></i> Open site
                     </div>
@@ -636,7 +633,7 @@ def generate_html_grid(sites, settings):
         }}
 
         .repo-grid.list-view .repo-content {{
-            padding: 16px 20px;
+            padding: 16px 6px;
             flex: 1;
             display: flex;
             flex-direction: column;
