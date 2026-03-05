@@ -644,7 +644,7 @@ def generate_html_grid(sites, settings):
         }}
 
         .repo-grid.list-view .repo-content {{
-            padding: 16px 6px;
+            padding: 6px;
             flex: 1;
             display: flex;
             flex-direction: column;
