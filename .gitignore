@@ -1,0 +1,4 @@
+netlify.toml
+venv
+.env
+netlify-deploy.sh

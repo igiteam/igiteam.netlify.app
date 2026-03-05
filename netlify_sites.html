@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netlify Sites</title>
+
+    <link rel="icon" href="https://www.netlify.com/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="https://www.netlify.com/favicon.ico" sizes="180x180">
+    <link rel="icon" type="image/png" href="https://www.netlify.com/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://www.netlify.com/favicon-16x16.png" sizes="16x16">
+    <meta itemprop="name" content="Netlify Sites">
+    <meta itemprop="image" content="https://www.netlify.com/img/press/logomark.png">
+    <meta property="og:title" content="Netlify Sites">
+    <meta property="og:image" content="https://www.netlify.com/img/press/logomark.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:title" content="Netlify Sites">
+    <meta name="twitter:image" content="https://www.netlify.com/img/press/logomark.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        :root {
+            --github-bg: #ffffff;
+            --github-text: #24292f;
+            --github-text-secondary: #57606a;
+            --github-border: #d0d7de;
+            --github-primary: #0969da;
+            --github-green: #1a7f37;
+            --github-repo-bg: #ffffff;
+            --github-hover: #f6f8fa;
+            --github-shadow: rgba(140, 149, 159, 0.15);
+            --netlify-primary: #00c7b7;
+            --netlify-secondary: #32e6e2;
+        }
+
+        body {
+            background-color: var(--github-bg);
+            color: var(--github-text);
+            line-height: 1.5;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Repository Header */
+        .repo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--github-border);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .repo-header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--github-text);
+        }
+
+        .repo-count {
+            font-size: 14px;
+            color: var(--github-text-secondary);
+            background-color: var(--github-hover);
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-top: 8px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        .repo-search {
+            background-color: var(--github-bg);
+            border: 1px solid var(--github-border);
+            border-radius: 6px;
+            padding: 10px 12px;
+            color: var(--github-text);
+            font-size: 14px;
+            width: 300px;
+            transition: all 0.2s;
+            box-shadow: 0 1px 0 rgba(27, 31, 35, 0.04);
+            flex-shrink: 0;
+        }
+
+        .repo-search:focus {
+            outline: none;
+            border-color: var(--github-primary);
+            box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.15);
+        }
+
+        .view-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        .sort-buttons {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .btn-icon {
+            background: none;
+            border: 1px solid var(--github-border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            color: var(--github-text-secondary);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            background-color: var(--github-bg);
+            white-space: nowrap;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--github-hover);
+            border-color: var(--github-primary);
+            color: var(--github-primary);
+        }
+
+        .btn-icon.active {
+            background-color: var(--github-primary);
+            border-color: var(--github-primary);
+            color: white;
+        }
+
+        .btn-icon i {
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .sort-text {
+                display: none;
+            }
+            .btn-icon {
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .search-container {
+                flex-wrap: wrap;
+            }
+            .repo-search {
+                width: 100%;
+            }
+            .view-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--github-border);
+            flex-shrink: 0;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 1.2;
+        }
+
+        .repo-count {
+            font-size: 14px;
+            color: var(--github-text-secondary);
+            background-color: var(--github-hover);
+            padding: 2px 12px;
+            border-radius: 12px;
+            display: inline-block;
+            align-self: flex-start;
+        }
+
+        /* Screenshot Container */
+        .screenshot-container {
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            border-radius: 6px 6px 0 0;
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .screenshot {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .repo-item:hover .screenshot {
+            transform: scale(1.05);
+        }
+
+        .screenshot-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .screenshot-container:hover .screenshot-overlay {
+            opacity: 1;
+        }
+
+        /* Repository Grid */
+        .repo-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .repo-grid.grid-view {
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        }
+
+        .repo-grid.list-view {
+            grid-template-columns: 1fr;
+        }
+
+        /* Repository Item - Grid View */
+        .repo-grid.grid-view .repo-item {
+            padding: 0 0 20px 0;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .repo-grid.grid-view .repo-content {
+            padding: 16px 20px 20px 20px;
+        }
+
+        .repo-grid.grid-view .repo-meta {
+            flex-wrap: wrap;
+            padding: 0 20px 0 20px;
+        }
+
+        /* Repository Item - List View */
+        .repo-grid.list-view .repo-item {
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+        }
+
+        .repo-grid.list-view .screenshot-container {
+            width: 240px;
+            height: 180px;
+            flex-shrink: 0;
+            border-radius: 6px 0 0 6px;
+        }
+
+        .repo-grid.list-view .repo-content {
+            padding: 16px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .repo-grid.list-view .repo-title {
+            margin-bottom: 8px;
+        }
+
+        .repo-grid.list-view .site-details {
+            margin: 8px 0 !important;
+        }
+
+        .repo-grid.list-view .repo-meta {
+            margin-top: auto;
+            padding: 0;
+        }
+
+        @media (max-width: 900px) {
+            .repo-grid.list-view .repo-item {
+                flex-direction: column;
+            }
+            .repo-grid.list-view .screenshot-container {
+                width: 100%;
+                height: 160px;
+                border-radius: 6px 6px 0 0;
+            }
+        }
+
+        /* Repository Item */
+        .repo-item {
+            border: 1px solid var(--github-border);
+            border-radius: 8px;
+            background-color: var(--github-repo-bg);
+            transition: all 0.2s;
+            display: flex;
+            height: 100%;
+            box-shadow: 0 1px 3px var(--github-shadow);
+        }
+
+        .repo-item:hover {
+            border-color: var(--github-primary);
+            box-shadow: 0 3px 6px var(--github-shadow);
+            transform: translateY(-2px);
+        }
+
+        .repo-title {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .repo-title a {
+            color: var(--github-primary);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.3;
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .repo-title a:hover {
+            text-decoration: underline;
+        }
+
+        .repo-visibility {
+            border: 1px solid var(--github-border);
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-size: 11px;
+            color: var(--github-text-secondary);
+            text-transform: capitalize;
+            font-weight: 500;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+
+        .repo-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--github-text-secondary);
+            margin-top: 12px;
+            align-items: center;
+            border-top: 1px solid var(--github-border);
+            padding-top: 12px;
+        }
+
+        .deploy-status {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .deploy-status i {
+            font-size: 12px;
+        }
+
+        .repo-updated {
+            font-size: 12px;
+            color: var(--github-text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 32px;
+            margin-top: 32px;
+            border-top: 1px solid var(--github-border);
+            color: var(--github-text-secondary);
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--github-primary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading & Error States */
+        .loading,
+        .error {
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 8px;
+            background-color: var(--github-hover);
+            border: 1px solid var(--github-border);
+            grid-column: 1 / -1;
+        }
+
+        .loading i {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: var(--github-primary);
+        }
+
+        .loading p {
+            font-size: 16px;
+            color: var(--github-text-secondary);
+        }
+
+        .error {
+            color: #cf222e;
+        }
+
+        .error i {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 8px;
+            background-color: var(--github-hover);
+            border: 1px solid var(--github-border);
+            grid-column: 1 / -1;
+        }
+
+        .no-results i {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: var(--github-text-secondary);
+        }
+
+        .no-results p {
+            font-size: 16px;
+            color: var(--github-text-secondary);
+        }
+
+        /* API Info */
+        .api-info {
+            font-size: 12px;
+            color: var(--github-text-secondary);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .api-info i {
+            color: var(--netlify-primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+
+            .repo-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-container {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .repo-search {
+                width: 100%;
+            }
+
+            .view-controls {
+                justify-content: space-between;
+            }
+
+            .repo-grid.grid-view {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Repository Header -->
+        <div class="repo-header">
+            <div>
+                <div class="user-info">
+                    <img src="https://www.netlify.com/img/press/logomark.png" alt="Netlify Avatar" class="user-avatar">
+                    <div class="user-details">
+                        <div class="user-name" id="userName">{account_name}</div>
+                        <div class="repo-count" id="repoCount">{site_count} sites</div>
+                    </div>
+                    <div class="api-info">
+                        <i class="fas fa-cloud"></i>
+                        <span>Live data from Netlify API</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="repo-search" placeholder="Find a site..." id="siteSearch">
+
+                <div class="view-controls">
+                    <div class="sort-buttons">
+                        <button class="btn-icon" id="sortTimeBtn" title="Sort by last updated">
+                            <i class="fas fa-clock"></i>
+                            <span class="sort-text">Updated</span>
+                        </button>
+                        <button class="btn-icon" id="sortNameBtn" title="Sort by name">
+                            <i class="fas fa-font"></i>
+                            <span class="sort-text">Name</span>
+                        </button>
+                    </div>
+
+                    <div class="view-toggle">
+                        <button class="btn-icon" id="gridViewBtn" title="Grid view">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="btn-icon" id="listViewBtn" title="List view">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Repository Grid -->
+        <div class="repo-grid grid-view" id="sitesContainer">
+            {site_cards}
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Netlify Sites Dashboard | <a href="https://app.netlify.com" target="_blank">app.netlify.com</a></p>
+            <p>Generated on {generated_date}</p>
+        </div>
+    </div>
+
+    <script>
+        // Site data
+        const sitesData = {sites_json};
+        
+        // State management
+        let currentSites = [...sitesData];
+        let currentSort = localStorage.getItem('netlifySort') || 'time';
+        let currentView = localStorage.getItem('netlifyView') || 'grid';
+        let currentSearchQuery = '';
+
+        // Format date to relative time
+        function formatDate(dateString) {
+            if (!dateString) return "N/A";
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffInSeconds = Math.floor((now - date) / 1000);
+
+            if (diffInSeconds < 60) {
+                return "just now";
+            } else if (diffInSeconds < 3600) {
+                const minutes = Math.floor(diffInSeconds / 60);
+                return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+            } else if (diffInSeconds < 86400) {
+                const hours = Math.floor(diffInSeconds / 3600);
+                return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+            } else if (diffInSeconds < 604800) {
+                const days = Math.floor(diffInSeconds / 86400);
+                if (days === 1) return "yesterday";
+                return `${days} days ago`;
+            } else if (diffInSeconds < 2592000) {
+                const weeks = Math.floor(diffInSeconds / 604800);
+                return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+            } else if (diffInSeconds < 31536000) {
+                const months = Math.floor(diffInSeconds / 2592000);
+                return `${months} month${months > 1 ? 's' : ''} ago`;
+            } else {
+                const years = Math.floor(diffInSeconds / 31536000);
+                return `${years} year${years > 1 ? 's' : ''} ago`;
+            }
+        }
+
+        // Sort sites
+        function sortSites(sites, sortType) {
+            const sorted = [...sites];
+            switch (sortType) {
+                case 'name':
+                    return sorted.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+                case 'time':
+                default:
+                    return sorted.sort((a, b) => new Date(b.updated_at || b.created_at) - new Date(a.updated_at || a.created_at));
+            }
+        }
+
+        // Search sites
+        function searchSites(sites, query) {
+            if (!query.trim()) return sites;
+            
+            const searchTerms = query.toLowerCase().split(' ');
+            return sites.filter(site => {
+                const siteText = `
+                    ${site.name.toLowerCase()}
+                    ${site.custom_domain ? site.custom_domain.toLowerCase() : ''}
+                    ${site.url ? site.url.toLowerCase() : ''}
+                    ${site.account_name ? site.account_name.toLowerCase() : ''}
+                `;
+                return searchTerms.every(term => siteText.includes(term));
+            });
+        }
+
+        // Update view buttons active state
+        function updateViewButtons() {
+            const gridBtn = document.getElementById('gridViewBtn');
+            const listBtn = document.getElementById('listViewBtn');
+            gridBtn.classList.toggle('active', currentView === 'grid');
+            listBtn.classList.toggle('active', currentView === 'list');
+        }
+
+        // Update sort buttons active state
+        function updateSortButtons() {
+            const sortTimeBtn = document.getElementById('sortTimeBtn');
+            const sortNameBtn = document.getElementById('sortNameBtn');
+            sortTimeBtn.classList.toggle('active', currentSort === 'time');
+            sortNameBtn.classList.toggle('active', currentSort === 'name');
+        }
+
+        // Apply view to container
+        function applyView() {
+            const container = document.getElementById('sitesContainer');
+            container.classList.toggle('grid-view', currentView === 'grid');
+            container.classList.toggle('list-view', currentView === 'list');
+        }
+
+        // Render sites
+        function renderSites(sites) {
+            const container = document.getElementById('sitesContainer');
+            const repoCount = document.getElementById('repoCount');
+            
+            if (!sites || sites.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>No sites found matching your search.</p>
+                    </div>
+                `;
+                repoCount.textContent = '0 sites';
+                return;
+            }
+
+            repoCount.textContent = `${sites.length} site${sites.length > 1 ? 's' : ''}`;
+
+            let html = '';
+            sites.forEach(site => {
+                // Get the best URL to use
+                const siteUrl = site.url || null;
+                const screenshotUrl = siteUrl ? `https://img.sdappnet.cloud/?url=${siteUrl.replace('https://', '').replace('http://', '').split('/')[0]}&w=1920&h=1080` : null;
+                
+                // Site details from API response
+                const siteName = site.name || 'Unnamed Site';
+                const customDomain = site.custom_domain || 'No custom domain';
+                const accountName = site.account_name || site.account_slug || 'Personal';
+                const plan = site.plan || 'free';
+                const visibility = plan === 'free' ? 'public' : 'private';
+                const sslEnabled = site.ssl || false;
+                const createdAt = site.created_at || '';
+                const updatedAt = site.updated_at || '';
+                
+                // Get build settings if available
+                const buildSettings = site.build_settings || {};
+                const repoUrl = buildSettings.repo_url || null;
+                const repoBranch = buildSettings.repo_branch || 'main';
+
+                html += `
+                    <div class="repo-item">
+                        <div class="screenshot-container" onclick="window.open('${siteUrl || '#'}', '_blank')">
+                            <img class="screenshot" src="${screenshotUrl || 'https://via.placeholder.com/600x400?text=No+Screenshot'}" 
+                                 alt="Screenshot of ${siteName}"
+                                 onerror="this.src='https://via.placeholder.com/600x400?text=Failed+to+load'">
+                            <div class="screenshot-overlay">
+                                <i class="fas fa-external-link-alt"></i> Open site
+                            </div>
+                        </div>
+                        <div class="repo-content">
+                            <div class="repo-title">
+                                <a href="${siteUrl || '#'}" target="_blank">${siteName}</a>
+                                <span class="repo-visibility">${visibility}</span>
+                            </div>
+                            
+                            <div class="site-details" style="margin: 12px 0; color: var(--github-text-secondary); font-size: 13px;">
+                                <div style="margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-globe" style="width: 16px; color: var(--github-primary);"></i>
+                                    <span>${customDomain}</span>
+                                </div>
+                                <div style="margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-link" style="width: 16px; color: var(--github-green);"></i>
+                                    <span>${siteUrl || 'No URL'}</span>
+                                </div>
+                                <div style="margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-users" style="width: 16px; color: var(--github-text-secondary);"></i>
+                                    <span>${accountName}</span>
+                                </div>
+                                ${repoUrl ? `
+                                <div style="margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fas fa-code-branch" style="width: 16px; color: #f1e05a;"></i>
+                                    <span>${repoUrl} (${repoBranch})</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                            
+                            <div class="repo-meta">
+                                <div class="deploy-status">
+                                    <i class="fas fa-check-circle" style="color: ${sslEnabled ? 'var(--github-green)' : '#ef4444'};"></i>
+                                    <span>SSL ${sslEnabled ? 'Enabled' : 'Disabled'}</span>
+                                </div>
+                                <div class="repo-updated">
+                                    <span>Updated ${formatDate(updatedAt || createdAt)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            applyView();
+        }
+
+        // Update and render with current state
+        function updateAndRender() {
+            let filteredSites = searchSites(currentSites, currentSearchQuery);
+            filteredSites = sortSites(filteredSites, currentSort);
+            renderSites(filteredSites);
+            updateSortButtons();
+        }
+
+        // Setup event listeners
+        function setupControls() {
+            const searchInput = document.getElementById('siteSearch');
+            const sortTimeBtn = document.getElementById('sortTimeBtn');
+            const sortNameBtn = document.getElementById('sortNameBtn');
+            const gridViewBtn = document.getElementById('gridViewBtn');
+            const listViewBtn = document.getElementById('listViewBtn');
+
+            // Search
+            searchInput.addEventListener('input', (e) => {
+                currentSearchQuery = e.target.value;
+                updateAndRender();
+            });
+
+            // Sort buttons
+            sortTimeBtn.addEventListener('click', () => {
+                currentSort = 'time';
+                localStorage.setItem('netlifySort', 'time');
+                updateAndRender();
+            });
+
+            sortNameBtn.addEventListener('click', () => {
+                currentSort = 'name';
+                localStorage.setItem('netlifySort', 'name');
+                updateAndRender();
+            });
+
+            // View buttons
+            gridViewBtn.addEventListener('click', () => {
+                currentView = 'grid';
+                localStorage.setItem('netlifyView', 'grid');
+                updateViewButtons();
+                applyView();
+            });
+
+            listViewBtn.addEventListener('click', () => {
+                currentView = 'list';
+                localStorage.setItem('netlifyView', 'list');
+                updateViewButtons();
+                applyView();
+            });
+
+            // Set initial button states
+            updateViewButtons();
+            updateSortButtons();
+            applyView();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSites(currentSites);
+            setupControls();
+            document.getElementById('siteSearch').focus();
+        });
+    </script>
+</body>
+
+</html>
