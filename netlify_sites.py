@@ -1118,7 +1118,7 @@ def generate_html_grid(sites, settings):
                                     <span>SSL ${{sslEnabled ? 'Enabled' : 'Disabled'}}</span>
                                 </div>
                                 <div class="repo-updated">
-                                    <span>Updated ${{formatDate(updatedAt)}} <a href=${{screenshotUrl}} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; margin-right: 4px margin-left: 4px">🏞</a><a href=${{screenshotUrlRC}} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">📸</a></span>
+                                    <span>Updated ${{formatDate(updatedAt)}} <a href=${{screenshotUrl}} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; margin-right: 4px; margin-left: 4px;">🏞</a><a href=${{screenshotUrlRC}} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">📸</a></span>
                                 </div>
                             </div>
                         </div>
