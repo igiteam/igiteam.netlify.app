@@ -630,7 +630,7 @@ def generate_html_grid(sites, settings):
 
         /* Repository Item - List View */
         .repo-grid.list-view .repo-item {{
-            padding: 0;
+            padding: 0 0 6px 0;
             display: flex;
             flex-direction: row;
             overflow: hidden;
