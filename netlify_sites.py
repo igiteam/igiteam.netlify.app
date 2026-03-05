@@ -325,7 +325,15 @@ def generate_html_grid(sites, settings):
                 </div>
             </div>
         '''
+    # Get the first site's screenshot for meta image (if available)
+    meta_image = settings['avatar']  # default to avatar
+    if sites_data and len(sites_data) > 0:
+        first_site = sites_data[0]
+        if first_site.get('url'):
+            domain = first_site['url'].replace('https://', '').replace('http://', '').split('/')[0]
+            meta_image = f"https://img.sdappnet.cloud/?url={domain}&w=1920&h=1080"
     
+
     # Read the HTML template with ALL curly braces escaped (doubled)
     html_template = """<!DOCTYPE html>
 <html lang="en">
@@ -333,19 +341,19 @@ def generate_html_grid(sites, settings):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netlify Sites</title>
+    <title>{username} - Netlify Sites</title>
 
-    <link rel="icon" href="https://www.netlify.com/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="https://www.netlify.com/favicon.ico" sizes="180x180">
-    <link rel="icon" type="image/png" href="https://www.netlify.com/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://www.netlify.com/favicon-16x16.png" sizes="16x16">
-    <meta itemprop="name" content="Netlify Sites">
-    <meta itemprop="image" content="https://www.netlify.com/img/press/logomark.png">
-    <meta property="og:title" content="Netlify Sites">
-    <meta property="og:image" content="https://www.netlify.com/img/press/logomark.png">
+    <link rel="icon" href="{avatar}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{avatar}" sizes="180x180">
+    <link rel="icon" type="image/png" href="{avatar}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{avatar}"" sizes="16x16">
+    <meta itemprop="name" content="{username} - Netlify Sites">
+    <meta itemprop="image" content="{meta_image}">
+    <meta property="og:title" content="{username} - Netlify Sites">
+    <meta property="og:image" content="{avatar}">
     <meta property="og:type" content="website">
-    <meta name="twitter:title" content="Netlify Sites">
-    <meta name="twitter:image" content="https://www.netlify.com/img/press/logomark.png">
+    <meta name="twitter:title" content="{username} - Netlify Sites">
+    <meta name="twitter:image" content="{meta_image}">
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -603,7 +611,7 @@ def generate_html_grid(sites, settings):
 
         /* Repository Item - Grid View */
         .repo-grid.grid-view .repo-item {{
-            padding: 0 0 20px 0;
+            padding: 0 0 6px 0;
             flex-direction: column;
             overflow: hidden;
         }}
@@ -1168,7 +1176,8 @@ def generate_html_grid(sites, settings):
         site_count=len(sites),
         site_cards=site_cards_html,
         generated_date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        sites_json=json.dumps(sites_data)
+        sites_json=json.dumps(sites_data),
+        meta_image=meta_image  # Add this line
     )
     
     return html_content
