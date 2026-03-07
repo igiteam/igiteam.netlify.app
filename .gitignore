@@ -2,3 +2,6 @@ netlify.toml
 venv
 .env
 netlify-deploy.sh
+
+# Local Netlify folder
+.netlify
