@@ -931,7 +931,17 @@ def generate_html_grid(sites, settings):
         <!-- Add this after your existing buttons -->
         <div
             style="position: fixed; bottom: 20px; right: 30px; z-index: 999999; display: flex; flex-direction: column; gap: 10px;">
-            <!-- Netlify Link -->
+            
+            <!-- Arcade Controllers · Reference Table  Link -->
+            <div
+                style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
+                <a href="https://cdn.gitgpt.chat/rtx/arcade-controllers-reference-table.html" target="_blank">
+                    <img src="https://cdn.gitgpt.chat/rtx/images/Blue-Lightsaber-PNG-HD.png" alt="Arcade Controllers Logo"
+                        style="width: 40px; height: 40px; display: block;">
+                </a>
+            </div>
+           
+            <!-- Github Link -->
             <div
                 style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
                 <a href="https://github.com/igiteam/igiteam.netlify.app" target="_blank">
