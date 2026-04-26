@@ -284,7 +284,7 @@ def generate_html_grid(sites, settings):
         screenshot_url = None
         if site_url:
             domain = site_url.replace('https://', '').replace('http://', '').split('/')[0]
-            screenshot_url = f"https://img.sdappnet.cloud/?url={domain}&w=1920&h=1080"
+            screenshot_url = f"https://img.gitgpt.chat/?url={domain}&w=1920&h=1080"
 
         site_cards_html += f'''
             <div class="repo-item">
@@ -334,7 +334,7 @@ def generate_html_grid(sites, settings):
         first_site = sites_data[0]
         if first_site.get('url'):
             domain = first_site['url'].replace('https://', '').replace('http://', '').split('/')[0]
-            meta_image = f"https://img.sdappnet.cloud/?url={domain}&w=1920&h=1080"
+            meta_image = f"https://img.gitgpt.chat/?url={domain}&w=1920&h=1080"
     
 
     # Read the HTML template with ALL curly braces escaped (doubled)
@@ -885,7 +885,7 @@ def generate_html_grid(sites, settings):
                     </div>
                     <div class="api-info">
                         <i class="fas fa-cloud"></i>
-                        <span>Live data from Netlify API <a href="https://img.sdappnet.cloud/queue/stats" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">🏞</a></span>
+                        <span>Live data from Netlify API <a href="https://img.gitgpt.chat/queue/stats" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">🏞</a></span>
                     </div>
                 </div>
             </div>
@@ -935,7 +935,7 @@ def generate_html_grid(sites, settings):
             <div
                 style="width: 60px; height: 60px; border-radius: 50%; background: rgba(30, 30, 40, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">
                 <a href="https://github.com/igiteam/igiteam.netlify.app" target="_blank">
-                    <img src="https://cdn.sdappnet.cloud/rtx/images/github-icon.png" alt="Github Logo"
+                    <img src="https://cdn.gitgpt.chat/rtx/images/github-icon.png" alt="Github Logo"
                         style="width: 40px; height: 40px; display: block;">
                 </a>
             </div>
@@ -1068,8 +1068,8 @@ def generate_html_grid(sites, settings):
             let html = '';
             sites.forEach(site => {{
                 const siteUrl = site.url || null;
-                const screenshotUrl = siteUrl ? `https://img.sdappnet.cloud/?url=${{siteUrl.replace('https://', '').replace('http://', '').split('/')[0]}}&w=1920&h=1080` : null;
-                const screenshotUrlRC = siteUrl ? `https://img.sdappnet.cloud/?url=${{siteUrl.replace('https://', '').replace('http://', '').split('/')[0]}}&w=1920&h=1080&rc=1` : null;
+                const screenshotUrl = siteUrl ? `https://img.gitgpt.chat/?url=${{siteUrl.replace('https://', '').replace('http://', '').split('/')[0]}}&w=1920&h=1080` : null;
+                const screenshotUrlRC = siteUrl ? `https://img.gitgpt.chat/?url=${{siteUrl.replace('https://', '').replace('http://', '').split('/')[0]}}&w=1920&h=1080&rc=1` : null;
                 const siteName = site.name || 'Unnamed Site';
                 const customDomain = site.custom_domain || 'No custom domain';
                 const accountName = site.account_name || site.account_slug || '{username}';
